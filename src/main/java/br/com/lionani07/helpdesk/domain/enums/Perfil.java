@@ -1,6 +1,7 @@
 package br.com.lionani07.helpdesk.domain.enums;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public enum Perfil {
     ADMIN(0, "ROLE_ADMIN"),
@@ -26,7 +27,7 @@ public enum Perfil {
 
     public static Perfil toEnum(Integer codigo) {
         return Arrays.stream(Perfil.values())
-                .filter(perfil -> perfil.codigo == codigo)
+                .filter(perfil -> Objects.equals(perfil.codigo, codigo))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("Perfil inválido"));
     }
 }
