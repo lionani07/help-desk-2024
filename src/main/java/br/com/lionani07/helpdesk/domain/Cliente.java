@@ -1,8 +1,8 @@
 package br.com.lionani07.helpdesk.domain;
 
-import br.com.lionani07.helpdesk.domain.Chamado;
-import br.com.lionani07.helpdesk.domain.Pessoa;
-import br.com.lionani07.helpdesk.domain.enums.Perfil;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +11,10 @@ import java.util.List;
 
 @Getter
 @Setter
+@Entity(name = "CLIENTE")
 public class Cliente extends Pessoa {
 
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private List<Chamado> chamados = new ArrayList<>();
 
     public Cliente() {

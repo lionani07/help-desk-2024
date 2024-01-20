@@ -1,6 +1,8 @@
 package br.com.lionani07.helpdesk.domain;
 
 import br.com.lionani07.helpdesk.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,13 +15,25 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"id", "cpf"})
+@Entity(name = "PESSOA")
 public abstract class Pessoa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+
+    @Column(unique = true)
     private String cpf;
+    @Column(unique = true)
     private String email;
     private String senha;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PERFIS")
     protected Set<Integer> perfis = new HashSet<>();
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCriacao = LocalDate.now();
     public Pessoa() {
         addPerfil(Perfil.CLIENTE);
