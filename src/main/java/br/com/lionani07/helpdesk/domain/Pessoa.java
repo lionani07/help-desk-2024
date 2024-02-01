@@ -21,12 +21,15 @@ public abstract class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
 
     @Column(unique = true)
     private String cpf;
+
     @Column(unique = true)
     private String email;
+
     private String senha;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -39,9 +42,10 @@ public abstract class Pessoa {
         addPerfil(Perfil.CLIENTE);
     }
 
-    public Pessoa(Integer id, String nome, String email, String senha) {
+    public Pessoa(Integer id, String nome, String cpf, String email, String senha) {
         this.id = id;
         this.nome = nome;
+        this.cpf = cpf;
         this.email = email;
         this.senha = senha;
         addPerfil(Perfil.CLIENTE);

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public enum Perfil {
-    ADMIN(0, "ROLE_ADMIN"),
+    ADMIN(1, "ROLE_ADMIN"),
     CLIENTE(2, "ROLE_CLIENTE"),
     TECNICO(3, "ROLE_TECNICO");
 

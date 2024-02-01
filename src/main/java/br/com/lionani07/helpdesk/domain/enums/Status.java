@@ -6,9 +6,7 @@ public enum Status {
     ABERTO(0, "ABERTO"),
     ANDAMENTO(2, "ANDAMENTO"),
     ENCERRADO(3, "ENCERRADO");
-
     private Integer codigo;
-
     private String descricao;
 
     Status(Integer codigo, String descricao) {

@@ -12,18 +12,17 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity(name = "TECNICO")
+@Entity(name = "TECNICO") //TODO: PRECISA DISSO? ACHO QUE NAO
 public class Tecnico extends Pessoa {
 
     @OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)
     private List<Chamado> chamados = new ArrayList<>();
-
     public Tecnico() {
         super();
         super.addPerfil(Perfil.TECNICO);
     }
-    public Tecnico(Integer id, String nome, String email, String senha) {
-        super(id, nome, email, senha);
+    public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
+        super(id, nome, cpf, email, senha);
         super.addPerfil(Perfil.TECNICO);
     }
 }

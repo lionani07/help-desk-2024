@@ -6,9 +6,7 @@ public enum Prioridade {
     BAIXA(0, "BAIXA"),
     MEDIA(2, "MEDIA"),
     ALTA(3, "C");
-
     private Integer codigo;
-
     private String descricao;
 
     Prioridade(Integer codigo, String descricao) {
