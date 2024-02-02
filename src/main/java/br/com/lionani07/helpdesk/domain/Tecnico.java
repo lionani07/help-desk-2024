@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity(name = "TECNICO") //TODO: PRECISA DISSO? ACHO QUE NAO
+@Entity(name = "TECNICO")
 public class Tecnico extends Pessoa {
 
     @OneToMany(mappedBy = "tecnico", fetch = FetchType.EAGER)

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity(name = "CLIENTE") //TODO: PRECISA DISSO? ACHO QUE NAO
+@Entity(name = "CLIENTE")
 public class Cliente extends Pessoa {
 
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
