@@ -1,5 +1,6 @@
 package br.com.lionani07.helpdesk.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
@@ -14,6 +15,7 @@ import java.util.List;
 @Entity(name = "CLIENTE")
 public class Cliente extends Pessoa {
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private List<Chamado> chamados = new ArrayList<>();
 

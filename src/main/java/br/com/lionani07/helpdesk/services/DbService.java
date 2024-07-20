@@ -33,10 +33,11 @@ public class DbService {
         final Cliente cli1 = new Cliente(null, "Linus Torvalds", "54494387029", "torvals@gmail.com", "123");
 
         final Chamado c1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado 01", "Primeiro chamado", tec1, cli1);
+        final Chamado c2 = new Chamado(null, Prioridade.ALTA, Status.ABERTO, "Chamado 02", "Segundo chamado", tec1, cli1);
 
         this.clienteRepository.saveAll(Arrays.asList(cli1));
         this.tecnicoRepository.saveAll(Arrays.asList(tec1));
-        this.chamadoRepository.saveAll(Arrays.asList(c1));
+        this.chamadoRepository.saveAll(Arrays.asList(c1, c2));
 
     }
 }

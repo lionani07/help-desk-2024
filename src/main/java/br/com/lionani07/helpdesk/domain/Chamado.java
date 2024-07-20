@@ -4,10 +4,16 @@ import br.com.lionani07.helpdesk.domain.enums.Prioridade;
 import br.com.lionani07.helpdesk.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity(name = "CHAMADO")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Chamado {
 
     @Id
