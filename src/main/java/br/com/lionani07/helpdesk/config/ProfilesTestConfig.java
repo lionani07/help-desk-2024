@@ -1,7 +1,6 @@
-package br.com.lionani07.helpdesk;
+package br.com.lionani07.helpdesk.config;
 
 import br.com.lionani07.helpdesk.services.DbService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
