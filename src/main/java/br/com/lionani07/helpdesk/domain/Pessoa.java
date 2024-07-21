@@ -20,24 +20,25 @@ public abstract class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    protected Integer id;
 
-    private String nome;
-
-    @Column(unique = true)
-    private String cpf;
+    protected String nome;
 
     @Column(unique = true)
-    private String email;
+    protected String cpf;
 
-    private String senha;
+    @Column(unique = true)
+    protected String email;
+
+    protected String senha;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PERFIS")
     protected Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataCriacao = LocalDate.now();
+    protected LocalDate dataCriacao = LocalDate.now();
+
     public Pessoa() {
         addPerfil(Perfil.CLIENTE);
     }

@@ -1,6 +1,6 @@
-package br.com.lionani07.helpdesk;
+package br.com.lionani07.helpdesk.controller;
 
-import br.com.lionani07.helpdesk.domain.Tecnico;
+import br.com.lionani07.helpdesk.domain.dto.TecnicoDTO;
 import br.com.lionani07.helpdesk.services.TecnicoService;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -18,7 +18,7 @@ public class TecnicoController {
     private final TecnicoService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Tecnico> findById(@PathVariable Integer id) {
+    public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
         val tecnico = this.service.findById(id);
         return ResponseEntity.ok().body(tecnico);
     }

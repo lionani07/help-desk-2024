@@ -1,8 +1,10 @@
 package br.com.lionani07.helpdesk.domain;
 
+import br.com.lionani07.helpdesk.domain.dto.ChamadoDTO;
 import br.com.lionani07.helpdesk.domain.enums.Prioridade;
 import br.com.lionani07.helpdesk.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +35,7 @@ public class Chamado {
     private Prioridade prioridade;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "tecnico_id")
     private Tecnico tecnico;
     @ManyToOne
@@ -47,5 +50,9 @@ public class Chamado {
         this.observacoes = observacoes;
         this.tecnico = tecnico;
         this.cliente = cliente;
+    }
+
+    public ChamadoDTO toDTO() {
+        return new ChamadoDTO(this.id, this.titulo);
     }
 }
