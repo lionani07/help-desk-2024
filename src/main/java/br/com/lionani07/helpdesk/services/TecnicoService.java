@@ -18,6 +18,6 @@ public class TecnicoService {
     public TecnicoDTO findById(final Integer id) {
         return this.repository.findById(id)
                 .map(Tecnico::toDTO)
-                .orElseThrow(() -> new ResourceNotFoundException("Tecnico nao existe"));
+                .orElseThrow(() -> new ResourceNotFoundException("Tecnico não existe para id = " + id));
     }
 }
