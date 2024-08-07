@@ -7,7 +7,9 @@ import br.com.lionani07.helpdesk.repositories.TecnicoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -19,5 +21,9 @@ public class TecnicoService {
         return this.repository.findById(id)
                 .map(Tecnico::toDTO)
                 .orElseThrow(() -> new ResourceNotFoundException("Tecnico não existe para id = " + id));
+    }
+
+    public List<TecnicoDTO> findAll() {
+        return this.repository.findAll().stream().map(Tecnico::toDTO).collect(Collectors.toList());
     }
 }
