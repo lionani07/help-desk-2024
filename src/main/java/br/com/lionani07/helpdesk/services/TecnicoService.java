@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,5 +24,9 @@ public class TecnicoService {
 
     public List<TecnicoDTO> findAll() {
         return this.repository.findAll().stream().map(Tecnico::toDTO).collect(Collectors.toList());
+    }
+
+    public TecnicoDTO create(TecnicoDTO tecnicoDTO) {
+        return this.repository.save(Tecnico.from(tecnicoDTO)).toDTO();
     }
 }

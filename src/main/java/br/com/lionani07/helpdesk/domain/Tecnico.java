@@ -6,8 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,10 @@ public class Tecnico extends Pessoa {
     public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
         super(id, nome, cpf, email, senha);
         super.addPerfil(Perfil.TECNICO);
+    }
+
+    public static Tecnico from(TecnicoDTO dto) {
+        return new Tecnico(null, dto.getNome(), dto.getCpf(), dto.getEmail(), dto.getSenha());
     }
 
     public TecnicoDTO toDTO() {

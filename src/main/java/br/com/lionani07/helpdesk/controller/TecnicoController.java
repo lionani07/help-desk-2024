@@ -1,14 +1,14 @@
 package br.com.lionani07.helpdesk.controller;
 
+import br.com.lionani07.helpdesk.domain.Tecnico;
 import br.com.lionani07.helpdesk.domain.dto.TecnicoDTO;
 import br.com.lionani07.helpdesk.services.TecnicoService;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -29,5 +29,16 @@ public class TecnicoController {
     public ResponseEntity<List<TecnicoDTO>> findAll() {
         val tecnicos = this.service.findAll();
         return ResponseEntity.ok(tecnicos);
+    }
+
+    @PostMapping
+    public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO tecnicoDTO) {
+        val tecnicoCreated = this.service.create(tecnicoDTO);
+        val uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
+                .path("/{id}")
+                .buildAndExpand(tecnicoCreated.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(tecnicoCreated);
     }
 }
