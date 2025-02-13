@@ -1,6 +1,5 @@
 package br.com.lionani07.helpdesk.controller;
 
-import br.com.lionani07.helpdesk.domain.Tecnico;
 import br.com.lionani07.helpdesk.domain.dto.TecnicoDTO;
 import br.com.lionani07.helpdesk.services.TecnicoService;
 import lombok.AllArgsConstructor;
@@ -8,7 +7,6 @@ import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 

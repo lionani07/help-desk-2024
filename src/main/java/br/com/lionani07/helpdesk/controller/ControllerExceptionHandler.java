@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
+    private static final String RESOURCE_NOT_FOUND = "Resource not found";
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandarError> ResourceNotFoundException(ResourceNotFoundException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandarError standarError = StandarError.builder()
                 .status(status)
-                .error("Resource not found")
+                .error(RESOURCE_NOT_FOUND)
                 .message(e.getMessage())
                 .path(request.getRequestURI())
                 .build();
