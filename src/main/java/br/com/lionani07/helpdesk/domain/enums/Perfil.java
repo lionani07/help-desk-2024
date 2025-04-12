@@ -8,9 +8,9 @@ public enum Perfil {
     CLIENTE(2, "ROLE_CLIENTE"),
     TECNICO(3, "ROLE_TECNICO");
 
-    private Integer codigo;
+    private final Integer codigo;
 
-    private String descricao;
+    private final String descricao;
 
     Perfil(Integer codigo, String descricao) {
         this.codigo = codigo;
