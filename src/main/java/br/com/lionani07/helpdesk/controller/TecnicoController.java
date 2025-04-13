@@ -2,6 +2,7 @@ package br.com.lionani07.helpdesk.controller;
 
 import br.com.lionani07.helpdesk.domain.dto.TecnicoDTO;
 import br.com.lionani07.helpdesk.services.TecnicoService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class TecnicoController {
     }
 
     @PostMapping
-    public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO tecnicoDTO) {
+    public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO tecnicoDTO) {
         val tecnicoCreated = this.service.create(tecnicoDTO);
         val uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")

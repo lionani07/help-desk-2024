@@ -1,11 +1,12 @@
-package br.com.lionani07.helpdesk.controller;
+package br.com.lionani07.helpdesk.controller.handler;
 
-import br.com.lionani07.helpdesk.exceptions.DataIntegrartionException;
+import br.com.lionani07.helpdesk.exceptions.DataIntegrationException;
 import br.com.lionani07.helpdesk.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.val;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -27,8 +28,8 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(standarError);
     }
 
-    @ExceptionHandler(DataIntegrartionException.class)
-    public ResponseEntity<StandarError> dataIntegrationException(DataIntegrartionException e, HttpServletRequest request) {
+    @ExceptionHandler(DataIntegrationException.class)
+    public ResponseEntity<StandarError> dataIntegrationException(DataIntegrationException e, HttpServletRequest request) {
         val status = HttpStatus.BAD_REQUEST;
         StandarError error = StandarError.builder()
                 .status(status)
@@ -38,5 +39,22 @@ public class ControllerExceptionHandler {
                 .build();
 
         return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandarError> methodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
+        val status = HttpStatus.BAD_REQUEST;
+        val errors = e.getFieldErrors().stream().map(it -> new FieldMessageEror(it.getField(), it.getDefaultMessage())).toList();
+
+        val validationError = new ValidationError(
+                status,
+                "Validation Error",
+                "Campos inválidos",
+                request.getRequestURI()
+        );
+
+        validationError.setErrors(errors);
+
+        return ResponseEntity.status(status).body(validationError);
     }
 }
