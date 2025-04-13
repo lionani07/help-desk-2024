@@ -8,8 +8,10 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +34,9 @@ public class Tecnico extends Pessoa {
     }
 
     public static Tecnico from(TecnicoDTO dto) {
-        return new Tecnico(null, dto.getNome(), dto.getCpf(), dto.getEmail(), dto.getSenha());
+        val tecnico = new Tecnico(null, dto.getNome(), dto.getCpf(), dto.getEmail(), dto.getSenha());
+        tecnico.getPerfis().addAll(dto.perfisAsCode());
+        return tecnico;
     }
 
     public TecnicoDTO toDTO() {
@@ -43,7 +47,7 @@ public class Tecnico extends Pessoa {
                 .email(this.email)
                 .senha(this.senha)
                 .dataCriacao(this.dataCriacao)
-                .perfils(this.getPerfis())
+                .perfis(this.perfisToEnum())
                 .chamados(this.chamados.stream().map(Chamado::toDTO).collect(Collectors.toList()))
                 .build();
     }

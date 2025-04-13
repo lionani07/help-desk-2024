@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +22,10 @@ public class TecnicoDTO {
     private String email;
     private String senha;
     private LocalDate dataCriacao;
-    private Set<Perfil> perfils = new HashSet<>();
+    private Set<Perfil> perfis = new HashSet<>();
     private List<ChamadoDTO> chamados = new ArrayList<>();
+
+    public Set<Integer> perfisAsCode() {
+        return this.perfis.stream().map(Perfil::getCodigo).collect(Collectors.toSet());
+    }
 }

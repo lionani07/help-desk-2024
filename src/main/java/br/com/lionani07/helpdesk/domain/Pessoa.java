@@ -3,11 +3,9 @@ package br.com.lionani07.helpdesk.domain;
 import br.com.lionani07.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -58,7 +56,7 @@ public abstract class Pessoa {
         this.perfis.add(perfil.getCodigo());
     }
 
-    public Set<Perfil> getPerfis() {
-        return perfis.stream().map(Perfil::toEnum).collect(Collectors.toSet());
+    public Set<Perfil> perfisToEnum() {
+        return this.perfis.stream().map(Perfil::toEnum).collect(Collectors.toSet());
     }
 }
