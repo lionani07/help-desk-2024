@@ -14,13 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/tecnicos")
 @AllArgsConstructor
+// TODO: ESTAMOS usando o mesmo Dto para todo, nao acho legal!, mas só tamos brincando um pouco, entao tudo bem
 public class TecnicoController {
 
     private final TecnicoService service;
 
     @GetMapping("/{id}")
     public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
-        val tecnico = this.service.findById(id);
+        val tecnico = this.service.findByIdAsDto(id);
         return ResponseEntity.ok().body(tecnico);
     }
 
@@ -39,5 +40,11 @@ public class TecnicoController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(tecnicoCreated);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicoDTO tecnicoDTO) {
+        val tecnicoUpdated = this.service.update(id, tecnicoDTO);
+        return ResponseEntity.ok(tecnicoUpdated);
     }
 }

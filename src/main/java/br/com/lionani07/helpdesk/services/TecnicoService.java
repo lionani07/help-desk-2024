@@ -5,7 +5,10 @@ import br.com.lionani07.helpdesk.domain.dto.TecnicoDTO;
 import br.com.lionani07.helpdesk.exceptions.DataIntegrationException;
 import br.com.lionani07.helpdesk.exceptions.ResourceNotFoundException;
 import br.com.lionani07.helpdesk.repositories.TecnicoRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.val;
+import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +21,12 @@ public class TecnicoService {
 
     private final TecnicoRepository repository;
 
-    public TecnicoDTO findById(final Integer id) {
+    public TecnicoDTO findByIdAsDto(final Integer id) {
+        return this.findById(id).toDTO();
+    }
+
+    private Tecnico findById(final Integer id) {
         return this.repository.findById(id)
-                .map(Tecnico::toDTO)
                 .orElseThrow(() -> new ResourceNotFoundException("Tecnico não existe para id = " + id));
     }
 
@@ -33,6 +39,16 @@ public class TecnicoService {
             return this.repository.save(Tecnico.from(tecnicoDTO)).toDTO();
         } catch (DataIntegrityViolationException e) {
             System.out.println(e.getMessage());
+            throw new DataIntegrationException("Cpf ou Email Já cadastrado");
+        }
+    }
+
+    public TecnicoDTO update(Integer id, @Valid TecnicoDTO tecnicoDTO) {
+        try {
+        val tecnicoFound = this.findById(id);
+        BeanUtils.copyProperties(tecnicoDTO, tecnicoFound, "id");
+        return this.repository.save(tecnicoFound).toDTO();
+        } catch (DataIntegrityViolationException e) {
             throw new DataIntegrationException("Cpf ou Email Já cadastrado");
         }
     }
