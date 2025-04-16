@@ -52,4 +52,13 @@ public class TecnicoService {
             throw new DataIntegrationException("Cpf ou Email Já cadastrado");
         }
     }
+
+    public void delete(Integer id) {
+        val tecnico = this.findById(id);
+        if (!tecnico.getChamados().isEmpty()) {
+            throw new DataIntegrationException("Tecnico não pode ser deletado. Possui ordens de serviço!");
+        }
+
+        this.repository.deleteById(id);
+    }
 }
