@@ -35,7 +35,7 @@ public class Tecnico extends Pessoa {
 
     public static Tecnico from(TecnicoDTO dto) {
         val tecnico = new Tecnico(null, dto.getNome(), dto.getCpf(), dto.getEmail(), dto.getSenha());
-        tecnico.getPerfis().addAll(dto.perfisAsCode());
+        tecnico.getPerfis().addAll(dto.getPerfis());
         return tecnico;
     }
 
@@ -47,7 +47,7 @@ public class Tecnico extends Pessoa {
                 .email(this.email)
                 .senha(this.senha)
                 .dataCriacao(this.dataCriacao)
-                .perfis(this.perfisToEnum())
+                .perfis(this.perfis)
                 .chamados(this.chamados.stream().map(Chamado::toDTO).collect(Collectors.toList()))
                 .build();
     }

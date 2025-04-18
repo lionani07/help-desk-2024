@@ -32,12 +32,15 @@ public abstract class Pessoa {
 
     protected String senha;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "PERFIS")
-    protected Set<Integer> perfis = new HashSet<>();
-
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
+
+    //TODO: MUDAR PARA ENUM PARA FAZER ALGUNS TESTES
+    //TODO: MUDAR PARA UMA ENTITY
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PERFIS")
+    @Enumerated(EnumType.STRING)
+    protected Set<Perfil> perfis = new HashSet<>();
 
     public Pessoa() {
         addPerfil(Perfil.CLIENTE);
@@ -53,10 +56,10 @@ public abstract class Pessoa {
     }
 
     public void addPerfil(Perfil perfil) {
-        this.perfis.add(perfil.getCodigo());
+        this.perfis.add(perfil);
     }
 
-    public Set<Perfil> perfisToEnum() {
-        return this.perfis.stream().map(Perfil::toEnum).collect(Collectors.toSet());
-    }
+//    public Set<Perfil> perfisToEnum() {
+//        return this.perfis.stream().map(Perfil::toEnum).collect(Collectors.toSet());
+//    }
 }
