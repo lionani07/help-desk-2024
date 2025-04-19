@@ -12,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -46,10 +47,12 @@ public class Cliente extends Pessoa {
         return ClienteDTO.builder()
                 .id(this.id)
                 .nome(this.nome)
+                .cpf(this.cpf)
                 .email(this.email)
                 .senha(this.senha)
                 .dataCriacao(this.dataCriacao)
                 .perfis(this.perfis)
+                .chamados(this.chamados.stream().map(Chamado::toDTO).toList())
                 .build();
     }
 }

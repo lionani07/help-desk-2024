@@ -13,6 +13,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class ClienteService {
@@ -40,5 +43,12 @@ public class ClienteService {
     private Cliente findById(Integer id) {
         return this.clienteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado!"));
+    }
+
+    public List<ClienteDTO> findAll() {
+        return this.clienteRepository.findAll()
+                .stream()
+                .map(Cliente::toDto)
+                .toList();
     }
 }
