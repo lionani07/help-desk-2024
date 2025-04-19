@@ -38,7 +38,6 @@ public class TecnicoService {
         try {
             return this.repository.save(Tecnico.from(tecnicoDTO)).toDTO();
         } catch (DataIntegrityViolationException e) {
-            System.out.println(e.getMessage());
             throw new DataIntegrationException("Cpf ou Email Já cadastrado");
         }
     }
