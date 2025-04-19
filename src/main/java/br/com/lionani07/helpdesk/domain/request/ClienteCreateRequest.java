@@ -3,6 +3,7 @@ package br.com.lionani07.helpdesk.domain.request;
 import br.com.lionani07.helpdesk.domain.enums.Perfil;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +14,7 @@ public class ClienteCreateRequest {
     private Integer id;
     @NotBlank(message = "campo é obrigatório")
     private String nome;
-    @NotBlank(message = "campo é obrigatório")
+    @CPF(message = "Cpf inválido")
     private String cpf;
     @NotBlank(message = "campo é obrigatório")
     private String email;
