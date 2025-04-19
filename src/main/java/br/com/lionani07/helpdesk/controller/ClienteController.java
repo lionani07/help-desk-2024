@@ -1,5 +1,6 @@
 package br.com.lionani07.helpdesk.controller;
 
+import br.com.lionani07.helpdesk.domain.Tecnico;
 import br.com.lionani07.helpdesk.domain.dto.ClienteDTO;
 import br.com.lionani07.helpdesk.domain.dto.TecnicoDTO;
 import br.com.lionani07.helpdesk.domain.request.ClienteCreateRequest;
@@ -41,5 +42,11 @@ public class ClienteController {
     public ResponseEntity<List<ClienteDTO>> findAll() {
         val clientes = this.clienteService.findAll();
         return ResponseEntity.ok(clientes);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteDTO> findById(@PathVariable Integer id) {
+        val cliente = this.clienteService.findByIdAsDto(id);
+        return ResponseEntity.ok(cliente);
     }
 }

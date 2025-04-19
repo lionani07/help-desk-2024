@@ -45,6 +45,10 @@ public class ClienteService {
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado!"));
     }
 
+    public ClienteDTO findByIdAsDto(Integer id) {
+        return this.findById(id).toDto();
+    }
+
     public List<ClienteDTO> findAll() {
         return this.clienteRepository.findAll()
                 .stream()
