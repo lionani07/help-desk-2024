@@ -5,6 +5,7 @@ import br.com.lionani07.helpdesk.domain.request.ClienteCreateRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class Cliente extends Pessoa {
 
     @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+    @Builder.Default
     private List<Chamado> chamados = new ArrayList<>();
 
     public Cliente() {

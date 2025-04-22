@@ -22,6 +22,6 @@ public class ClienteDTO {
     private String email;
     private String senha;
     private LocalDate dataCriacao;
-    private Set<Perfil> perfis;
-    private List<ChamadoDTO> chamados;
+    private Set<Perfil> perfis = new HashSet<>();
+    private List<ChamadoDTO> chamados = new ArrayList<>();
 }

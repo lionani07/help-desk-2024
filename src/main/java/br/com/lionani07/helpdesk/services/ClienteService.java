@@ -55,4 +55,12 @@ public class ClienteService {
                 .map(Cliente::toDto)
                 .toList();
     }
+
+    public void deleteById(Integer id) {
+        val cliente = this.findById(id);
+        if (!cliente.getChamados().isEmpty()) {
+            throw new DataIntegrationException("Cliente não pode ser deletado. Possui ordens de serviço!");
+        }
+        this.clienteRepository.deleteById(id);
+    }
 }
