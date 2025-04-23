@@ -7,6 +7,8 @@ import br.com.lionani07.helpdesk.repositories.ChamadoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ChamadoService {
@@ -15,7 +17,11 @@ public class ChamadoService {
 
     public ChamadoDTO findById(Integer id) {
         return this.chamadoRepository.findById(id)
-                .map(Chamado::toFullDTO)
+                .map(Chamado::toDTO)
                 .orElseThrow(() -> new ResourceNotFoundException("Chamado não enecontrado!"));
+    }
+
+    public List<ChamadoDTO> findAll() {
+        return this.chamadoRepository.findAll().stream().map(Chamado::toDTO).toList();
     }
 }

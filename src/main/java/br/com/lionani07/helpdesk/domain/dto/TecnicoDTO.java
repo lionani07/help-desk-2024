@@ -2,14 +2,16 @@ package br.com.lionani07.helpdesk.domain.dto;
 
 import br.com.lionani07.helpdesk.domain.enums.Perfil;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,8 +31,4 @@ public class TecnicoDTO {
     private LocalDate dataCriacao;
     private Set<Perfil> perfis = new HashSet<>();
     private List<ChamadoDTO> chamados = new ArrayList<>();
-
-    public Set<Integer> perfisAsCode() {
-        return this.perfis.stream().map(Perfil::getCodigo).collect(Collectors.toSet());
-    }
 }

@@ -3,10 +3,7 @@ package br.com.lionani07.helpdesk.domain;
 import br.com.lionani07.helpdesk.domain.dto.ChamadoDTO;
 import br.com.lionani07.helpdesk.domain.enums.Prioridade;
 import br.com.lionani07.helpdesk.domain.enums.Status;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -61,20 +58,10 @@ public class Chamado {
                 .dataFechamento(this.dataFechamento)
                 .prioridade(this.prioridade)
                 .status(this.status)
-                .build();
-    }
-
-    public ChamadoDTO toFullDTO() {
-        return ChamadoDTO.builder()
-                .id(this.id)
-                .titulo(this.titulo)
-                .observacoes(this.observacoes)
-                .dataAbertura(this.dataAbertura)
-                .dataFechamento(this.dataFechamento)
-                .prioridade(this.prioridade)
-                .status(this.status)
-                .cliente(this.cliente.toDtoDetails())
-                .tecnico(this.tecnico.toDTODetails())
+                .clienteId(this.cliente.id)
+                .clienteNome(this.cliente.nome)
+                .tecnicoId(this.tecnico.id)
+                .tecnicoNome(this.tecnico.nome)
                 .build();
     }
 

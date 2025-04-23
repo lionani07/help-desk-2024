@@ -1,7 +1,6 @@
 package br.com.lionani07.helpdesk.domain.dto;
 
 import br.com.lionani07.helpdesk.domain.enums.Perfil;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

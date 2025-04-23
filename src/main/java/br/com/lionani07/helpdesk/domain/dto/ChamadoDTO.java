@@ -23,7 +23,8 @@ public class ChamadoDTO {
     private LocalDate dataFechamento;
     private Status status;
     private Prioridade prioridade;
-    private TecnicoDTO tecnico;
-    private ClienteDTO cliente;
-
+    private Integer tecnicoId;
+    private String tecnicoNome;
+    private Integer clienteId;
+    private String clienteNome;
 }
