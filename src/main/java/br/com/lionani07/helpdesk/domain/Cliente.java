@@ -2,32 +2,28 @@ package br.com.lionani07.helpdesk.domain;
 
 import br.com.lionani07.helpdesk.domain.dto.ClienteDTO;
 import br.com.lionani07.helpdesk.domain.request.ClienteCreateRequest;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @Entity(name = "CLIENTE")
 @SuperBuilder
+@NoArgsConstructor
 public class Cliente extends Pessoa {
 
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-    @Builder.Default
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Chamado> chamados = new ArrayList<>();
-
-    public Cliente() {
-        super();
-    }
 
     public Cliente(Integer id, String nome, String cpf, String email, String senha) {
         super(id, nome, cpf, email, senha);
@@ -55,6 +51,13 @@ public class Cliente extends Pessoa {
                 .dataCriacao(this.dataCriacao)
                 .perfis(this.perfis)
                 .chamados(this.chamados.stream().map(Chamado::toDTO).toList())
+                .build();
+    }
+
+    public ClienteDTO toDtoDetails() {
+        return ClienteDTO.builder()
+                .id(this.id)
+                .nome(this.nome)
                 .build();
     }
 }
