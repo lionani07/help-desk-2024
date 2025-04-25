@@ -1,14 +1,13 @@
 package br.com.lionani07.helpdesk.controller;
 
 import br.com.lionani07.helpdesk.domain.dto.ChamadoDTO;
+import br.com.lionani07.helpdesk.domain.request.ChamadoCreateRequest;
 import br.com.lionani07.helpdesk.services.ChamadoService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +28,12 @@ public class ChamadoController {
     public ResponseEntity<List<ChamadoDTO>> findAll() {
         val chamados = this.chamadoService.findAll();
         return ResponseEntity.ok(chamados);
+    }
+
+    //TODO: MAKING --WIP
+    @PostMapping
+    public ResponseEntity<ChamadoDTO> create(@Valid @RequestBody ChamadoCreateRequest request) {
+        return ResponseEntity.ok().build();
     }
 
 }
