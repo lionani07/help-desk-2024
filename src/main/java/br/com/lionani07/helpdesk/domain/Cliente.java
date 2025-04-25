@@ -30,7 +30,7 @@ public class Cliente extends Pessoa {
     }
 
     public static Cliente from(ClienteCreateRequest request) {
-        return (Cliente) Cliente.builder()
+        return Cliente.builder()
                 .id(null)
                 .cpf(request.getCpf())
                 .nome(request.getNome())
