@@ -2,12 +2,11 @@ package br.com.lionani07.helpdesk.domain.request;
 
 import br.com.lionani07.helpdesk.domain.enums.Prioridade;
 import br.com.lionani07.helpdesk.domain.enums.Status;
+import br.com.lionani07.helpdesk.validations.ValueOfEnum;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
-//TODO: Validar enum com Bean CustomValidation
 @Data
 public class ChamadoCreateRequest {
 
@@ -19,11 +18,13 @@ public class ChamadoCreateRequest {
     @NotBlank(message = "Campo é obrigatório")
     private String observacoes;
 
-    @NotNull(message = "Campo é obrigatório")
-    private Status status;
+    @NotBlank(message = "Campo é obrigatório")
+    @ValueOfEnum(enumClass = Status.class)
+    private String status;
 
-    @NotNull(message = "Campo é obrigatório")
-    private Prioridade prioridade;
+    @NotBlank(message = "Campo é obrigatório")
+    @ValueOfEnum(enumClass = Prioridade.class, message = "Deve ser algum valor do enum Prioridade")
+    private String prioridade;
 
     @Positive(message = "Campo é obrigatório")
     private Integer tecnicoId;

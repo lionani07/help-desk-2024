@@ -2,6 +2,7 @@ package br.com.lionani07.helpdesk.services;
 
 import br.com.lionani07.helpdesk.domain.Chamado;
 import br.com.lionani07.helpdesk.domain.dto.ChamadoDTO;
+import br.com.lionani07.helpdesk.domain.enums.Prioridade;
 import br.com.lionani07.helpdesk.domain.enums.Status;
 import br.com.lionani07.helpdesk.domain.request.ChamadoCreateRequest;
 import br.com.lionani07.helpdesk.exceptions.ResourceNotFoundException;
@@ -43,8 +44,8 @@ public class ChamadoService {
         val cliente = this.clienteService.findById(request.getClienteId());
         val chamado = new Chamado(
                 null,
-                request.getPrioridade(),
-                request.getStatus(),
+                Prioridade.valueOf(request.getPrioridade()),
+                Status.valueOf(request.getStatus()),
                 request.getTitulo(),
                 request.getObservacoes(),
                 tecnico, cliente
