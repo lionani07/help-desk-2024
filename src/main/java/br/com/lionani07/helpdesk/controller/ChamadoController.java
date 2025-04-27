@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -30,10 +31,14 @@ public class ChamadoController {
         return ResponseEntity.ok(chamados);
     }
 
-    //TODO: MAKING --WIP
     @PostMapping
     public ResponseEntity<ChamadoDTO> create(@Valid @RequestBody ChamadoCreateRequest request) {
-        return ResponseEntity.ok().build();
+        val chamado = this.chamadoService.create(request);
+        val uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(chamado.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(chamado);
     }
 
 }

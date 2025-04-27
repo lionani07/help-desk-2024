@@ -25,7 +25,7 @@ public class TecnicoService {
         return this.findById(id).toDTO();
     }
 
-    private Tecnico findById(final Integer id) {
+    public Tecnico findById(final Integer id) {
         return this.repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tecnico não existe para id = " + id));
     }

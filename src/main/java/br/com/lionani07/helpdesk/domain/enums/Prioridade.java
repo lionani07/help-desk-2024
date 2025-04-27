@@ -1,9 +1,13 @@
 package br.com.lionani07.helpdesk.domain.enums;
 
-import java.util.Arrays;
+import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.Objects;
+
+@Getter
 public enum Prioridade {
-    BAIXA(0, "BAIXA"),
+    BAIXA(1, "BAIXA"),
     MEDIA(2, "MEDIA"),
     ALTA(3, "C");
     private final Integer codigo;
@@ -14,17 +18,9 @@ public enum Prioridade {
         this.descricao = descricao;
     }
 
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
     public static Prioridade toEnum(Integer codigo) {
         return Arrays.stream(Prioridade.values())
-                .filter(perfil -> perfil.codigo == codigo)
+                .filter(perfil -> Objects.equals(perfil.codigo, codigo))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("Prioridade inválida"));
     }
 }

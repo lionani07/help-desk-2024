@@ -40,7 +40,7 @@ public class ClienteService {
         }
     }
 
-    private Cliente findById(Integer id) {
+    public Cliente findById(Integer id) {
         return this.clienteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado!"));
     }
