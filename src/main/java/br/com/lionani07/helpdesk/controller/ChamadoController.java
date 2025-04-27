@@ -21,7 +21,7 @@ public class ChamadoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ChamadoDTO> findById(@PathVariable Integer id) {
-        val chamado = this.chamadoService.findById(id);
+        val chamado = this.chamadoService.findByIdAsDto(id);
         return ResponseEntity.ok(chamado);
     }
 
@@ -39,6 +39,12 @@ public class ChamadoController {
                 .buildAndExpand(chamado.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(chamado);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ChamadoDTO> update(@PathVariable Integer id, @Valid @RequestBody ChamadoCreateRequest request) {
+        val chamado = this.chamadoService.update(id, request);
+        return ResponseEntity.ok(chamado);
     }
 
 }
